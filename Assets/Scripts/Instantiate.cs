@@ -9,13 +9,16 @@ public class Instantiate : MonoBehaviour
 
     void Start()
     {
-        Instantiate(Tile, new Vector2(2,0), Quaternion.identity, parent);
-        Instantiate(Tile, new Vector2(0,2), Quaternion.identity, parent);
-        Instantiate(Tile, new Vector2(-2,0), Quaternion.identity, parent);
-        Instantiate(Tile, new Vector2(0,-2), Quaternion.identity, parent);
-        Instantiate(Tile, new Vector2(2,-2), Quaternion.identity, parent);
-        Instantiate(Tile, new Vector2(-2,2), Quaternion.identity, parent);
-        Instantiate(Tile, new Vector2(2,2), Quaternion.identity, parent);
-        Instantiate(Tile, new Vector2(-2,-2), Quaternion.identity, parent);
+        Create(-5,-2, 5, 2);
+    }
+
+    void Create(int fromX, int fromY, int toX, int toY) {
+        for(int i = fromX; i <= toX; i++) {
+            for(int j = fromY; j <= toY; j++) {
+                if(j != 0 || i != 0) {
+                    Instantiate(Tile, new Vector2(i * 2, j * 2), Quaternion.identity, parent);
+                }
+            }
+        }
     }
 }

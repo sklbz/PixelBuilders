@@ -4,52 +4,26 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-    public List<GameObject> objects;
-    public GameObject camera;
-    int interpolationFramesCount = 100, elapsedFrames = 0;
-    int targetX, targetY;
+    public GameObject mainCamera;
+    Vector3 targetPos;
+    bool isCameraMovementDefined = false;
+    int interpolationFramesCount = 100, elapsedFrames;
 
-    void Start() {
+    void Update() {
+      MoveCamera();
     }
 
-    private void Update() {
-      //Check for mouse click 
-        if (Input.GetMouseButtonDown(0)) {
-            RaycastHit raycastHit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out raycastHit, 100f)) {
-                if (raycastHit.transform != null) {
-                  //Custom method
-                    CurrentClickedGameObject(raycastHit.transform.gameObject);
-                }
-            }
-        }
-
-      //Lerp the camera Vector
-        SlideCamera();
+    public void CameraFocus(GameObject building) {
+      targetPos = new Vector3(building.transform.position.x, building.transform.position.y, -1);
+      elapsedFrames = 0;
+      isCameraMovementDefined = true;
     }
 
-    void DefineCameraMovement(int X, int Y) {
-        elapsedFrames = 0;
-        targetX = X;
-        targetY = Y;
-    }
-
-    void SlideCamera() {
-        if (elapsedFrames <= interpolationFramesCount) {
+    void MoveCamera() {
+        if(isCameraMovementDefined && elapsedFrames <= interpolationFramesCount) {
             float interpolationRatio = (float)elapsedFrames / interpolationFramesCount;
-
-            camera.transform.position = Vector3.Lerp(camera.transform.position, new Vector3(targetX, targetY, camera.transform.position.z), interpolationRatio);
+            mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPos, interpolationRatio);
             elapsedFrames++;
-        }
-    }
-
-    public void CurrentClickedGameObject(GameObject gameObject) {
-        foreach(GameObject obj in objects) {
-            if (obj == gameObject) {
-                DefineCameraMovement((int)gameObject.transform.position.x, (int)gameObject.transform.position.y);
-                return; 
-            }
         }
     }
 }
