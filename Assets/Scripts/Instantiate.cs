@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Instantiate : MonoBehaviour
 {
+    /*
     public GameObject Tile;
     public Transform parent;
 
@@ -21,4 +22,5 @@ public class Instantiate : MonoBehaviour
             }
         }
     }
+    */
 }

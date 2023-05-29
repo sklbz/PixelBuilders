@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 35
-  timeBtwIncreases: 0
-  nextIncreaseTime: 0
+  goldIncrease: 3
+  timeBtwIncreases: 30

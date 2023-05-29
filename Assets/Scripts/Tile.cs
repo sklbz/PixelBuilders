@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-/*     public bool isOccupied;
-    public Color greenColor;
-    public Color redColor;
+    public bool isOccupied = false/*, isConquered = false*/;
+//    public Color vacantColor, occupiedColor;
+    private SpriteRenderer rend;
 
-    private SpriteRenderer renderer;
-
-    private void Start() {
-        renderer = GetComponent<SpriteRenderer>();
+    void Start() {
+        rend = GetComponent<SpriteRenderer>();
     }
 
-    private void Update() {
-        (isOccupied == true) ? renderer.Color = greenColor : renderer.Color = redColor;
-    } */
+/*    void Update() {
+        rend.color = (isOccupied) ? occupiedColor : vacantColor;
+    }
+    */
 }
